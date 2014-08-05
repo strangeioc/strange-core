@@ -5,7 +5,7 @@ using strange.framework.impl;
 using System.Collections;
 
 namespace strange.unittests
-{
+{/*
 	[TestFixture()]
 	public class TestBindingAsPoolFacade
 	{
@@ -269,5 +269,6 @@ namespace strange.unittests
 			someValue = 0;
 		}
 	}
+  * */
 }
 
