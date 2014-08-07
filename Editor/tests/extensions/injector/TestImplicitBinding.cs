@@ -14,6 +14,8 @@ using strange.unittests.annotated.testCrossContextInterface;
 using strange.unittests.annotated.testImplTwo;
 using strange.unittests.testimplicitbindingnamespace;
 using System.Collections.Generic;
+using strange.extensions.implicitBind.impl;
+using System.Reflection;
 
 namespace strange.unittests
 {
@@ -531,6 +533,7 @@ namespace strange.unittests.testimplicitbindingnamespace
 		public TestImplicitBindingContext(object contextView) : base(contextView){}
 		protected override void mapBindings()
 		{
+			((ImplicitBinder)implicitBinder).SetAssembly(Assembly.GetExecutingAssembly());
 			implicitBinder.ScanForAnnotatedClasses(new string[]{"strange.unittests.testimplicitbindingnamespace"});
 			injectionBinder.Bind<TestImplicitBindingInjectionReceiver>().ToSingleton();
 		}

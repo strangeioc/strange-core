@@ -12,6 +12,7 @@ using strange.extensions.dispatcher.eventdispatcher.impl;
 using strange.extensions.mediation.impl;
 using strange.extensions.sequencer.impl;
 using strange.extensions.dispatcher.api;
+using System.Reflection;
 
 namespace strange.unittests
 {
@@ -40,6 +41,7 @@ namespace strange.unittests
 		protected override void mapBindings()
 		{
 			base.mapBindings();
+			((ImplicitBinder) implicitBinder).SetAssembly(Assembly.GetExecutingAssembly());
 			implicitBinder.ScanForAnnotatedClasses(ScannedPackages);
 		}
 
