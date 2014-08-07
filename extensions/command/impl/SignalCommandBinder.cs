@@ -174,7 +174,7 @@ namespace strange.extensions.command.impl
 		/// <exception cref="InjectionException">If there is no binding for this type.</exception>
 		public override void Unbind<T>()
 		{
-			ICommandBinding binding = (ICommandBinding) injectionBinder.GetBinding<T>();
+			IInjectionBinding binding = injectionBinder.GetBinding<T>();
 			if (binding != null)
 			{
 				T signal = (T) injectionBinder.GetInstance<T>(); 
