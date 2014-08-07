@@ -204,6 +204,27 @@ namespace strange.unittests
             Assert.AreEqual(100, instance.intValue);
         }
 
+		[Test]
+		public void TestUnbindByType()
+		{
+			commandBinder.Bind<NoArgSignal>().To<NoArgSignalCommand>();
+
+			commandBinder.Unbind<NoArgSignal>();
+
+			Assert.IsNull(commandBinder.GetBinding<NoArgSignal>());
+		}
+
+		[Test]
+		public void TestUnbindByInstance()
+		{
+			commandBinder.Bind<NoArgSignal>().To<NoArgSignalCommand>();
+
+			NoArgSignal noArgSignal = (NoArgSignal)injectionBinder.GetInstance<NoArgSignal>();
+
+			commandBinder.Unbind(noArgSignal, null);
+
+			Assert.IsNull(commandBinder.GetBinding<NoArgSignal>());
+		}
 
         class TestModel
         {
