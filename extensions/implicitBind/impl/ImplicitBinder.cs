@@ -46,6 +46,10 @@ namespace strange.extensions.implicitBind.impl
 			assembly = Assembly.GetExecutingAssembly();
 		}
 
+		public void SetAssembly(Assembly assembly) {
+			this.assembly = assembly;
+		}
+
 		/// <summary>
 		/// Search through indicated namespaces and scan for all annotated classes.
 		/// Automatically create bindings
