@@ -180,36 +180,39 @@ namespace strange.unittests
         }
 
 		[Test]
-		[ExpectedException(typeof(InjectionException))]
-		public void TestUnbindParent() {
+		public void TestUnbindParent()
+		{
 			Parent.injectionBinder.Bind<TestModel>().CrossContext();
 
 			Parent.injectionBinder.Unbind<TestModel>();
 
-			// This should throw an exception
-			Parent.injectionBinder.GetInstance<TestModel>();
+			Assert.Throws<InjectionException>(delegate() {
+				Parent.injectionBinder.GetInstance<TestModel>();
+			});
 		}
 
 		[Test]
-		[ExpectedException(typeof(InjectionException))]
-		public void TestUnbindChild() {
+		public void TestUnbindChild()
+		{
 			ChildOne.injectionBinder.Bind<TestModel>().CrossContext();
 
 			ChildOne.injectionBinder.Unbind<TestModel>();
 
-			// This should throw an exception
-			ChildOne.injectionBinder.GetInstance<TestModel>();
+			Assert.Throws<InjectionException>(delegate() {
+				ChildOne.injectionBinder.GetInstance<TestModel>();
+			});
 		}
 
 		[Test]
-		[ExpectedException(typeof(InjectionException))]
-		public void TestUnbindFromOther() {
+		public void TestUnbindFromOther()
+		{
 			ChildOne.injectionBinder.Bind<TestModel>().CrossContext();
 
 			ChildTwo.injectionBinder.Unbind<TestModel>();
 
-			// This should throw an exception
-			Parent.injectionBinder.GetInstance<TestModel>();
+			Assert.Throws<InjectionException>(delegate() {
+				Parent.injectionBinder.GetInstance<TestModel>();
+			});
 		}
 	}
 
