@@ -83,7 +83,7 @@ namespace strange.unittests
 
             Assert.AreNotEqual(list1, list2);
 
-            // Singleton
+            // Bound by value
             Assert.AreEqual(list1[0], list2[0]);
 
             // New instance
