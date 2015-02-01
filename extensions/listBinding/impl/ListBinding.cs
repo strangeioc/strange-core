@@ -37,24 +37,42 @@ namespace strange.extensions.listBind.impl
 
         public Type ListType { get; set; }
 
+        public Type ListItemType 
+        {
+            get
+            {
+                return ListType.GetGenericArguments()[0];
+            }
+        }
+
         public List<IInjectionBinding> Bindings { get { return this.bindings;  } }
 
         public new IInjectionBinding To<T>()
         {
-            var binding = injectionBinder.Bind(ListType).To<T>().ToName(typeof(T).ToString());
+            var binding = injectionBinder.Bind(ListItemType).To<T>().ToName(typeof(T).ToString());
             bindings.Add(binding);
-            //var binding = base.To<T>().ToName(typeof(T).ToString());
-            //this.bindings.Add(binding);
             return binding;
 
         }
 
         public IInjectionBinding ToValue(object o)
         {
-            var binding = injectionBinder.Bind(ListType).ToValue(o).ToName(o.ToString());
+            var binding = injectionBinder.GetBinding(o.GetType(), o.ToString());
+            if (binding == null)
+            {
+                binding = injectionBinder.Bind(ListItemType).ToValue(o).ToName(o.ToString());
+            }
             bindings.Add(binding);
             return binding;
         }
 
+
+
+        public IListBinding ToSingleton()
+        {
+            var listBinding = injectionBinder.GetBinding(ListType);
+            listBinding.ToSingleton();
+            return this;
+        }
     }
 }

@@ -67,10 +67,9 @@ namespace strange.extensions.listBind.impl
             else
             {
                 binding = base.Bind<T>() as IListBinding;
-                binding.ListType = typeof(T);
+                binding.ListType = typeof(IList<T>);
                 listTypes[typeof(T)] = binding;
                 injectionBinder.Bind<IList<T>>().To<List<T>>();
-                injectionBinder.Bind<List<T>>().To<List<T>>();
             }
             return binding;
         }
