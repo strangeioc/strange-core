@@ -29,7 +29,7 @@ namespace strange.extensions.listBind.api
         new IInjectionBinding To<T>();
         new IInjectionBinding ToValue(object o);
 
-        new IListBinding ToSingleton();
+        IListBinding ToSingleton();
 
         Type ListType { get; set; }
 
