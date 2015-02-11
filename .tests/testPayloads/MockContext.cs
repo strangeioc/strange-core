@@ -12,6 +12,8 @@ using strange.extensions.dispatcher.eventdispatcher.impl;
 using strange.extensions.mediation.impl;
 using strange.extensions.sequencer.impl;
 using strange.extensions.dispatcher.api;
+using strange.extensions.listBind.api;
+using strange.extensions.listBind.impl;
 
 namespace strange.unittests
 {
@@ -31,6 +33,7 @@ namespace strange.unittests
 		/// A Binder that maps Events to Sequences
 		public ISequencer sequencer{get;set;}
 
+        public IListBinder listBinder { get; set; }
 		public IImplicitBinder implicitBinder { get; set; }
 
 		public MockContext() : base() {}
@@ -56,6 +59,7 @@ namespace strange.unittests
 			injectionBinder.Bind<IMediationBinder>().To<MediationBinder>().ToSingleton();
 			injectionBinder.Bind<ISequencer>().To<EventSequencer>().ToSingleton();
 			injectionBinder.Bind<IImplicitBinder>().To<ImplicitBinder>().ToSingleton();
+            injectionBinder.Bind<IListBinder>().To<ListBinder>().ToSingleton();
 		}
 
 		protected override void instantiateCoreComponents()
@@ -67,7 +71,7 @@ namespace strange.unittests
 			mediationBinder = injectionBinder.GetInstance<IMediationBinder>() as IMediationBinder;
 			sequencer = injectionBinder.GetInstance<ISequencer>() as ISequencer;
 			implicitBinder = injectionBinder.GetInstance<IImplicitBinder>() as IImplicitBinder;
-
+            listBinder = injectionBinder.GetInstance<IListBinder>() as IListBinder;
 			(dispatcher as ITriggerProvider).AddTriggerable(commandBinder as ITriggerable);
 			(dispatcher as ITriggerProvider).AddTriggerable(sequencer as ITriggerable);
 
