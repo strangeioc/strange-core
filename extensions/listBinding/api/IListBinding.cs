@@ -27,7 +27,7 @@ namespace strange.extensions.listBind.api
     public interface IListBinding : IBinding
     {
         new IInjectionBinding To<T>();
-        new IInjectionBinding ToValue(object o);
+        IInjectionBinding ToValue(object o);
 
         IListBinding ToSingleton();
 
